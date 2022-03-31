@@ -1,0 +1,13 @@
+stages:
+  clean:
+    cmd: >
+      python scripts/clean.py 
+      -i data/raw.csv 
+      -o data/clean.csv
+    desc: Clean the raw Mauna Loa observatory data for easier use
+    deps:
+      - scripts/clean.py
+      - data/raw.csv
+    outs:
+      - data/clean.csv
+      - plots/mauna_loa.png
