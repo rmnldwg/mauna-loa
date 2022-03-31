@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  clean:
+    cmd: "python scripts/clean.py  -i data/raw.csv  -o data/clean.csv\n"
+    deps:
+    - path: data/raw.csv
+      md5: b8b564f6b4bde7dc2d6f49d90b9df902
+      size: 37077
+    - path: scripts/clean.py
+      md5: f74f4d9b6654c970d8567de7d850f9da
+      size: 1446
+    outs:
+    - path: data/clean.csv
+      md5: 42d9ada26a353fab068cf580db2da9cf
+      size: 21018
+    - path: plots/mauna_loa.png
+      md5: 899af42e535de36bcb5cf38a49f6d0e8
+      size: 210306
