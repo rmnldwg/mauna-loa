@@ -1,0 +1,4 @@
+[core]
+    remote = onedrive
+['remote "onedrive"']
+    url = /home/rmnldwg/OneDrive_USZ/dvc_remote
