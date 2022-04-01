@@ -26,3 +26,21 @@ stages:
     outs:
       - data/train.csv
       - data/test.csv
+  
+  train:
+    cmd: >
+      python scripts/train.py
+      -i data/train.csv
+      -o data
+      -p params.yaml
+    desc: Compute posterior mean & covariance for weights
+    params:
+      - scale
+      - train.noise_precision
+      - train.prior_precision
+      - train.cycle_freq
+    deps:
+      - data/train.csv
+    outs:
+      - data/post_mean.npy
+      - data/post_covmat.npy
