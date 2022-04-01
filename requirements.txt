@@ -1,4 +1,5 @@
 dvc
 numpy
+scipy
 pandas
 matplotlib
