@@ -16,3 +16,96 @@ stages:
     - path: plots/mauna_loa.png
       md5: 899af42e535de36bcb5cf38a49f6d0e8
       size: 210306
+  split:
+    cmd: "python scripts/split.py -i data/clean.csv -o data -p params.yaml\n"
+    deps:
+    - path: data/clean.csv
+      md5: 42d9ada26a353fab068cf580db2da9cf
+      size: 21018
+    - path: scripts/split.py
+      md5: 778ff52cebd52900ce1ce704ce27ffee
+      size: 1359
+    params:
+      params.yaml:
+        split_year: 2000
+    outs:
+    - path: data/test.csv
+      md5: 9e63400bb952b337f0d78be2f2a137d0
+      size: 7328
+    - path: data/train.csv
+      md5: 23a1bb6051c215f98e8f9fbd15b82666
+      size: 13717
+  train:
+    cmd: "python scripts/train.py -i data/train.csv -o data\n"
+    deps:
+    - path: data/train.csv
+      md5: 23a1bb6051c215f98e8f9fbd15b82666
+      size: 13717
+    - path: scripts/features.py
+      md5: ada59f3ff62365d7198faf23da28300d
+      size: 717
+    - path: scripts/train.py
+      md5: 4d416b3c02c81ccb1fd87a0d8d78bea8
+      size: 1895
+    params:
+      params.yaml:
+        cycle_len: -29.0
+        cycle_shift: 7
+        loc: 1958.2027
+        noise_precision: 10
+        prior_precision: 0.1
+        scale: 0.01
+        season_shift: -0.08
+    outs:
+    - path: data/post_covmat.npy
+      md5: ce22a2c198e2387211d7cd81187a30a8
+      size: 328
+    - path: data/post_mean.npy
+      md5: 81a47563b3daef7c1caba59980c78d49
+      size: 168
+  eval:
+    cmd: "python scripts/eval.py -i data -m metrics.json\n"
+    deps:
+    - path: data/post_covmat.npy
+      md5: ce22a2c198e2387211d7cd81187a30a8
+      size: 328
+    - path: data/post_mean.npy
+      md5: 81a47563b3daef7c1caba59980c78d49
+      size: 168
+    - path: scripts/eval.py
+      md5: ccb852a8a38330a0ddc47a79a63721e0
+      size: 2137
+    - path: scripts/features.py
+      md5: ada59f3ff62365d7198faf23da28300d
+      size: 717
+    params:
+      params.yaml:
+        cycle_len: -29.0
+        cycle_shift: 7
+        loc: 1958.2027
+        noise_precision: 10
+        scale: 0.01
+        season_shift: -0.08
+    outs:
+    - path: metrics.json
+      md5: f3a1af48ee556cb5aaba78483092f75b
+      size: 63
+  plots:
+    cmd: "python scripts/plots.py -i data -o plots\n"
+    deps:
+    - path: data/post_covmat.npy
+      md5: ce22a2c198e2387211d7cd81187a30a8
+      size: 328
+    - path: data/post_mean.npy
+      md5: 81a47563b3daef7c1caba59980c78d49
+      size: 168
+    - path: data/test.csv
+      md5: 9e63400bb952b337f0d78be2f2a137d0
+      size: 7328
+    - path: data/train.csv
+      md5: 23a1bb6051c215f98e8f9fbd15b82666
+      size: 13717
+    outs:
+    - path: plots/predictive.png
+      md5: d185372adc726430baa933e30bccbfbc
+      size: 307987

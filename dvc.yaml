@@ -11,3 +11,76 @@ stages:
     outs:
       - data/clean.csv
       - plots/mauna_loa.png
+  
+  split:
+    cmd: >
+      python scripts/split.py
+      -i data/clean.csv
+      -o data
+      -p params.yaml
+    desc: Split the cleaned data at a `split_year` into training & testing data
+    params:
+      - split_year
+    deps:
+      - scripts/split.py
+      - data/clean.csv
+    outs:
+      - data/train.csv
+      - data/test.csv
+  
+  train:
+    cmd: >
+      python scripts/train.py
+      -i data/train.csv
+      -o data
+    desc: Compute posterior mean & covariance for weights
+    params:
+      - scale
+      - loc
+      - noise_precision
+      - prior_precision
+      - season_shift
+      - cycle_len
+      - cycle_shift
+    deps:
+      - scripts/features.py
+      - scripts/train.py
+      - data/train.csv
+    outs:
+      - data/post_mean.npy
+      - data/post_covmat.npy
+  
+  eval:
+    cmd: >
+      python scripts/eval.py
+      -i data
+      -m metrics.json
+    desc: Evaluate the fit using the log-evidence and root mean squared error
+    params:
+      - scale
+      - loc
+      - noise_precision
+      - season_shift
+      - cycle_len
+      - cycle_shift
+    deps:
+      - scripts/features.py
+      - scripts/eval.py
+      - data/post_mean.npy
+      - data/post_covmat.npy
+    metrics:
+      - metrics.json
+  
+  plots:
+    cmd: >
+      python scripts/plots.py
+      -i data
+      -o plots
+    desc: Generate illustrative plots
+    deps:
+      - data/train.csv
+      - data/test.csv
+      - data/post_mean.npy
+      - data/post_covmat.npy
+    outs:
+      - plots/predictive.png
