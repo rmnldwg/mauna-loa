@@ -50,7 +50,7 @@ stages:
     params:
       params.yaml:
         cycle_len: -29.0
-        cycle_shift: 7
+        cycle_shift: 8
         loc: 1958.2027
         noise_precision: 10
         prior_precision: 0.1
@@ -58,19 +58,19 @@ stages:
         season_shift: -0.08
     outs:
     - path: data/post_covmat.npy
-      md5: ce22a2c198e2387211d7cd81187a30a8
+      md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
     - path: data/post_mean.npy
-      md5: 81a47563b3daef7c1caba59980c78d49
+      md5: 7f830ee1980278d0f21ae7dc7249fb9a
       size: 168
   eval:
     cmd: "python scripts/eval.py -i data -m metrics.json\n"
     deps:
     - path: data/post_covmat.npy
-      md5: ce22a2c198e2387211d7cd81187a30a8
+      md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
     - path: data/post_mean.npy
-      md5: 81a47563b3daef7c1caba59980c78d49
+      md5: 7f830ee1980278d0f21ae7dc7249fb9a
       size: 168
     - path: scripts/eval.py
       md5: ccb852a8a38330a0ddc47a79a63721e0
@@ -81,23 +81,23 @@ stages:
     params:
       params.yaml:
         cycle_len: -29.0
-        cycle_shift: 7
+        cycle_shift: 8
         loc: 1958.2027
         noise_precision: 10
         scale: 0.01
         season_shift: -0.08
     outs:
     - path: metrics.json
-      md5: f3a1af48ee556cb5aaba78483092f75b
+      md5: 511d9a3b21306ed9c5995acd33d5de08
       size: 63
   plots:
     cmd: "python scripts/plots.py -i data -o plots\n"
     deps:
     - path: data/post_covmat.npy
-      md5: ce22a2c198e2387211d7cd81187a30a8
+      md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
     - path: data/post_mean.npy
-      md5: 81a47563b3daef7c1caba59980c78d49
+      md5: 7f830ee1980278d0f21ae7dc7249fb9a
       size: 168
     - path: data/test.csv
       md5: 9e63400bb952b337f0d78be2f2a137d0
@@ -107,5 +107,5 @@ stages:
       size: 13717
     outs:
     - path: plots/predictive.png
-      md5: d185372adc726430baa933e30bccbfbc
-      size: 307987
+      md5: 5a5433c34f1ba1b688ae0286576d790c
+      size: 306708

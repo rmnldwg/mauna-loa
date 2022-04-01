@@ -9,4 +9,4 @@ prior_precision: 0.1
 season_shift: -0.08
 
 cycle_len: -29.
-cycle_shift: 7
+cycle_shift: 8
