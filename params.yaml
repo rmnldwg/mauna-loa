@@ -1,7 +1,10 @@
 split_year: 2000
 scale: 0.00001
 
-train:
-  noise_precision: 1.
-  prior_precision: 1.
-  cycle_freq: 100.
+noise_precision: 1.
+prior_precision: 1.
+
+season_shift: 0.5
+
+cycle_len: 11.
+cycle_shift: 5.

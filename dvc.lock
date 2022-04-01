@@ -33,21 +33,23 @@ stages:
       md5: 23a1bb6051c215f98e8f9fbd15b82666
       size: 13717
   train:
-    cmd: "python scripts/train.py -i data/train.csv -o data -p params.yaml\n"
+    cmd: "python scripts/train.py -i data/train.csv -o data\n"
     deps:
     - path: data/train.csv
       md5: 23a1bb6051c215f98e8f9fbd15b82666
       size: 13717
     params:
       params.yaml:
+        cycle_len: 11.0
+        cycle_shift: 5.0
+        noise_precision: 1.0
+        prior_precision: 1.0
         scale: 1e-05
-        train.cycle_freq: 100.0
-        train.noise_precision: 1.0
-        train.prior_precision: 1.0
+        season_shift: 0.5
     outs:
     - path: data/post_covmat.npy
-      md5: 51315a5f2da650801d5876cd235f2839
-      size: 256
+      md5: 77f095563abba6d73d566e155c97f931
+      size: 328
     - path: data/post_mean.npy
-      md5: 0ccfb27ea5e1fc2d98789f58e0e7e295
-      size: 160
+      md5: 933503e01e556f5d11d59d7ba51dd0cf
+      size: 168
