@@ -1,10 +1,12 @@
 split_year: 2000
-scale: 0.00001
 
-noise_precision: 1.
-prior_precision: 1.
+loc: 1958.2027
+scale: 0.01
 
-season_shift: 0.5
+noise_precision: 10
+prior_precision: 0.1
 
-cycle_len: 11.
-cycle_shift: 5.
+season_shift: -0.08
+
+cycle_len: -29.
+cycle_shift: 7
