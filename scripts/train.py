@@ -28,7 +28,7 @@ if __name__ == "__main__":
     year = train_df["year"].values
     target = train_df["average"].values
     
-    features = build_features(year=year)
+    features = build_features(year)
     num_features = features.shape[0]
     
     # prior on the weights
