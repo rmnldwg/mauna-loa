@@ -16,3 +16,19 @@ stages:
     - path: plots/mauna_loa.png
       md5: 899af42e535de36bcb5cf38a49f6d0e8
       size: 210306
+  split:
+    cmd: "python scripts/split.py -i data/clean.csv -o data -p params.yaml\n"
+    deps:
+    - path: data/clean.csv
+      md5: 42d9ada26a353fab068cf580db2da9cf
+      size: 21018
+    params:
+      params.yaml:
+        split_year: 2000
+    outs:
+    - path: data/test.csv
+      md5: 9e63400bb952b337f0d78be2f2a137d0
+      size: 7328
+    - path: data/train.csv
+      md5: 23a1bb6051c215f98e8f9fbd15b82666
+      size: 13717

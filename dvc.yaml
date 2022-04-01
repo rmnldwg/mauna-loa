@@ -11,3 +11,18 @@ stages:
     outs:
       - data/clean.csv
       - plots/mauna_loa.png
+  
+  split:
+    cmd: >
+      python scripts/split.py
+      -i data/clean.csv
+      -o data
+      -p params.yaml
+    desc: Split the cleaned data at a `split_year` into training & testing data
+    params:
+      - split_year
+    deps:
+      - data/clean.csv
+    outs:
+      - data/train.csv
+      - data/test.csv
