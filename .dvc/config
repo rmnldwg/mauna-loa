@@ -1,6 +1,0 @@
-[core]
-    remote = onedrive
-['remote "onedrive"']
-    url = /home/rmnldwg/OneDrive_USZ/dvc_remote
-['remote "dagshub"']
-    url = https://dagshub.com/rmnldwg/mauna-loa.dvc
