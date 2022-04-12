@@ -49,3 +49,35 @@ The structure of this repository is (hopefully) quite self-explanatory:
 ## Branches
 
 The `main` branch in this repository does everything very carefully according to best practices with DVC. But for comparison, there's also the `no-dvc` branch that does things more traditionally only using git. If you'd work with that one, I bet at some point you would face the very problem DVC was invented to solve: You have a broken state in you git history 😨
+
+Lastly there's the `notebook` branch which 'simply' uses a Jupyter notebook to implement the whole pipeline. This is also great and comes very naturally to any data scientist. But as soon as one goes beyong prototyping this can get cluttered and cumbersome. It is also susceptible to the same issues as the vanilla git repo.
+
+## ⚠️ Disclaimer
+
+I am not telling anybody that DVC is the one and only way to do data science. Quite the opposite: I am trying to show you that there are a range of tools out there and each one is designed for a specific purpose in mind. Let me show you what I think:
+
+### Jupyter notebooks are amaying if you
+
+- want to quickly capture a train of thought
+- need to prototype something
+- would like to present text, math and code in a written document
+
+### Plain old git is amazing if you
+
+- develop 'only' a codebase/package
+- work on something incrementally
+- want to share your work/codebase with others
+
+### DVC excels at
+
+- allowing you to also version large/huge files
+- versioning your pipelines
+- comparing different runs of your experiments
+- ensuring reproducability
+- **(bonus)** forcing you to adopt a number of best-pracices:
+    1. modularize your workflow
+    2. make your code more resilient
+    3. document what your do in a pythonic way (docstrings!)
+    4. add outputs (print/log) to your programs/scripts
+
+Some of the above bonuses can easily be perceived to be downsides of using DVC. And if they actually get in your way for a particular project, DVC might not be the right tool for *that* job. But generally, those things only improve your work and your developer skills.
