@@ -70,8 +70,7 @@ stages:
       - models/post_mean.npy
       - models/post_covmat.npy
     metrics:
-      - metrics.json:
-          cache: false
+      - metrics.json
   
   plots:
     cmd: >
@@ -85,6 +84,5 @@ stages:
       - data/test.csv
       - models/post_mean.npy
       - models/post_covmat.npy
-    plots:
-      - plots/predictive.png:
-          cache: false
+    outs:
+      - plots/predictive.png

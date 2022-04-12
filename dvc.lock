@@ -4,24 +4,24 @@ stages:
     cmd: "python scripts/clean.py  -i data/raw.csv  -o data/clean.csv\n"
     deps:
     - path: data/raw.csv
-      md5: b8b564f6b4bde7dc2d6f49d90b9df902
-      size: 37077
+      md5: 2a4a12e4f54d077989dc50def225a53e
+      size: 37121
     - path: scripts/clean.py
       md5: f74f4d9b6654c970d8567de7d850f9da
       size: 1446
     outs:
     - path: data/clean.csv
-      md5: 42d9ada26a353fab068cf580db2da9cf
-      size: 21018
+      md5: a620a1895c93e4aa3e0e43d1cc73f8dc
+      size: 21052
     - path: plots/mauna_loa.png
-      md5: 899af42e535de36bcb5cf38a49f6d0e8
-      size: 210306
+      md5: d65a0c83f0e417b4ff9d72a7b2d20f42
+      size: 210369
   split:
     cmd: "python scripts/split.py -i data/clean.csv -o data -p params.yaml\n"
     deps:
     - path: data/clean.csv
-      md5: 42d9ada26a353fab068cf580db2da9cf
-      size: 21018
+      md5: a620a1895c93e4aa3e0e43d1cc73f8dc
+      size: 21052
     - path: scripts/split.py
       md5: 778ff52cebd52900ce1ce704ce27ffee
       size: 1359
@@ -30,17 +30,17 @@ stages:
         split_year: 2000
     outs:
     - path: data/test.csv
-      md5: 9e63400bb952b337f0d78be2f2a137d0
-      size: 7328
+      md5: 7d1e8bc8c4e8d45b200179943534763c
+      size: 7364
     - path: data/train.csv
-      md5: 23a1bb6051c215f98e8f9fbd15b82666
-      size: 13717
+      md5: 5afcaeeb6fca23ab4954eaadd2401c28
+      size: 13715
   train:
     cmd: "python scripts/train.py -i data/train.csv -o models\n"
     deps:
     - path: data/train.csv
-      md5: 23a1bb6051c215f98e8f9fbd15b82666
-      size: 13717
+      md5: 5afcaeeb6fca23ab4954eaadd2401c28
+      size: 13715
     - path: scripts/features.py
       md5: ada59f3ff62365d7198faf23da28300d
       size: 717
@@ -61,7 +61,7 @@ stages:
       md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
     - path: models/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      md5: d46d36934a4e5392f9f3245271983977
       size: 168
   eval:
     cmd: "python scripts/eval.py --data data --models models --metrics metrics.json\n"
@@ -70,7 +70,7 @@ stages:
       md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
     - path: models/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      md5: d46d36934a4e5392f9f3245271983977
       size: 168
     - path: scripts/eval.py
       md5: 45dc7b0f0d4a0a81dd8f9e035d927dea
@@ -88,24 +88,24 @@ stages:
         season_shift: -0.08
     outs:
     - path: metrics.json
-      md5: 511d9a3b21306ed9c5995acd33d5de08
-      size: 63
+      md5: 8eb4338377271a9aa3cf97af665c8971
+      size: 64
   plots:
     cmd: "python scripts/plots.py --data data --models models --plots plots\n"
     deps:
     - path: data/test.csv
-      md5: 9e63400bb952b337f0d78be2f2a137d0
-      size: 7328
+      md5: 7d1e8bc8c4e8d45b200179943534763c
+      size: 7364
     - path: data/train.csv
-      md5: 23a1bb6051c215f98e8f9fbd15b82666
-      size: 13717
+      md5: 5afcaeeb6fca23ab4954eaadd2401c28
+      size: 13715
     - path: models/post_covmat.npy
       md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
     - path: models/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      md5: d46d36934a4e5392f9f3245271983977
       size: 168
     outs:
     - path: plots/predictive.png
-      md5: 5a5433c34f1ba1b688ae0286576d790c
-      size: 306708
+      md5: 058b6eedac6f9fb032e591e772af00e7
+      size: 306926
