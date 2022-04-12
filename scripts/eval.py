@@ -18,18 +18,16 @@ from features import build_features, noise_precision
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("-i", "--input", 
-                        required=True,
-                        help=("Folder where the test data `test.csv`, as well "
-                              "as the `post_mean.npy` & `post_covmat.npy` "
-                              "arrays can be found"))
-    parser.add_argument("-m", "--metrics", 
-                        required=False, default="metrics.json",
+    parser.add_argument("--data", required=False, default="data",
+                        help="Test data file (CSV)")
+    parser.add_argument("--models", required=False, default="models",
+                        help="Folder containing the model data (.npy files)")
+    parser.add_argument("--metrics", required=False, default="metrics.json",
                         help="Path to the metrics JSON file")
     args = parser.parse_args()
     
     # load the test data
-    with open(f"{args.input}/test.csv", 'r') as test_file:
+    with open(f"{args.data}/test.csv", 'r') as test_file:
         test_df = pd.read_csv(test_file, index_col=0)
     
     year = test_df["year"].values
@@ -40,8 +38,8 @@ if __name__ == "__main__":
     num_features = features.shape[0]
     
     # load the learned weights
-    post_mean = np.load(f"{args.input}/post_mean.npy")
-    post_covmat = np.load(f"{args.input}/post_covmat.npy")
+    post_mean = np.load(f"{args.models}/post_mean.npy")
+    post_covmat = np.load(f"{args.models}/post_covmat.npy")
     
     # compute posterior predictive
     post_predict_mean = features.T @ post_mean

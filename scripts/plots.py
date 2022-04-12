@@ -13,18 +13,20 @@ from features import build_features
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("-i", "--input", required=True,
+    parser.add_argument("--data", required=False, default="data",
                         help="Folder containing the `train.csv` & `test.csv`")
-    parser.add_argument("-o", "--output", required=False, default="plots",
+    parser.add_argument("--models", required=False, default="models",
+                        help="Folder with models (.npy files)")
+    parser.add_argument("--plots", required=False, default="plots",
                         help="Directory for plots and visualizations")
     args = parser.parse_args()
     
     # load the data
-    with open(f"{args.input}/train.csv", 'r') as train_file:
+    with open(f"{args.data}/train.csv", 'r') as train_file:
         train_df = pd.read_csv(train_file, index_col=0).rename({
             "average": "before 2000"
         }, axis="columns")
-    with open(f"{args.input}/test.csv", 'r') as test_file:
+    with open(f"{args.data}/test.csv", 'r') as test_file:
         test_df = pd.read_csv(test_file, index_col=0).rename({
             "average": "after 2000"
         }, axis="columns")
@@ -35,8 +37,8 @@ if __name__ == "__main__":
     num_features = features.shape[0]
     
     # load the learned weights
-    post_mean = np.load(f"{args.input}/post_mean.npy")
-    post_covmat = np.load(f"{args.input}/post_covmat.npy")
+    post_mean = np.load(f"{args.models}/post_mean.npy")
+    post_covmat = np.load(f"{args.models}/post_covmat.npy")
     
     # compute posterior predictive
     post_predict_mean = features.T @ post_mean
@@ -58,4 +60,4 @@ if __name__ == "__main__":
     ax.plot(year, post_predict_mean, label="posterior predictive")
     ax.grid("on")
     ax.legend()
-    fig.savefig(f"{args.output}/predictive.png", dpi=300)
+    fig.savefig(f"{args.plots}/predictive.png", dpi=300)

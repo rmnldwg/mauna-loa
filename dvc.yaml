@@ -32,7 +32,7 @@ stages:
     cmd: >
       python scripts/train.py
       -i data/train.csv
-      -o data
+      -o models
     desc: Compute posterior mean & covariance for weights
     params:
       - scale
@@ -47,14 +47,15 @@ stages:
       - scripts/train.py
       - data/train.csv
     outs:
-      - data/post_mean.npy
-      - data/post_covmat.npy
+      - models/post_mean.npy
+      - models/post_covmat.npy
   
   eval:
     cmd: >
       python scripts/eval.py
-      -i data
-      -m metrics.json
+      --data data
+      --models models
+      --metrics metrics.json
     desc: Evaluate the fit using the log-evidence and root mean squared error
     params:
       - scale
@@ -66,21 +67,22 @@ stages:
     deps:
       - scripts/features.py
       - scripts/eval.py
-      - data/post_mean.npy
-      - data/post_covmat.npy
+      - models/post_mean.npy
+      - models/post_covmat.npy
     metrics:
       - metrics.json
   
   plots:
     cmd: >
       python scripts/plots.py
-      -i data
-      -o plots
+      --data data
+      --models models
+      --plots plots
     desc: Generate illustrative plots
     deps:
       - data/train.csv
       - data/test.csv
-      - data/post_mean.npy
-      - data/post_covmat.npy
+      - models/post_mean.npy
+      - models/post_covmat.npy
     outs:
       - plots/predictive.png

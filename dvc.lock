@@ -36,7 +36,7 @@ stages:
       md5: 23a1bb6051c215f98e8f9fbd15b82666
       size: 13717
   train:
-    cmd: "python scripts/train.py -i data/train.csv -o data\n"
+    cmd: "python scripts/train.py -i data/train.csv -o models\n"
     deps:
     - path: data/train.csv
       md5: 23a1bb6051c215f98e8f9fbd15b82666
@@ -57,24 +57,24 @@ stages:
         scale: 0.01
         season_shift: -0.08
     outs:
-    - path: data/post_covmat.npy
+    - path: models/post_covmat.npy
       md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
-    - path: data/post_mean.npy
+    - path: models/post_mean.npy
       md5: 7f830ee1980278d0f21ae7dc7249fb9a
       size: 168
   eval:
-    cmd: "python scripts/eval.py -i data -m metrics.json\n"
+    cmd: "python scripts/eval.py --data data --models models --metrics metrics.json\n"
     deps:
-    - path: data/post_covmat.npy
+    - path: models/post_covmat.npy
       md5: 95db96efb381bfafc68db9c7fffd5dbb
       size: 328
-    - path: data/post_mean.npy
+    - path: models/post_mean.npy
       md5: 7f830ee1980278d0f21ae7dc7249fb9a
       size: 168
     - path: scripts/eval.py
-      md5: ccb852a8a38330a0ddc47a79a63721e0
-      size: 2137
+      md5: 45dc7b0f0d4a0a81dd8f9e035d927dea
+      size: 2083
     - path: scripts/features.py
       md5: ada59f3ff62365d7198faf23da28300d
       size: 717
@@ -91,20 +91,20 @@ stages:
       md5: 511d9a3b21306ed9c5995acd33d5de08
       size: 63
   plots:
-    cmd: "python scripts/plots.py -i data -o plots\n"
+    cmd: "python scripts/plots.py --data data --models models --plots plots\n"
     deps:
-    - path: data/post_covmat.npy
-      md5: 95db96efb381bfafc68db9c7fffd5dbb
-      size: 328
-    - path: data/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
-      size: 168
     - path: data/test.csv
       md5: 9e63400bb952b337f0d78be2f2a137d0
       size: 7328
     - path: data/train.csv
       md5: 23a1bb6051c215f98e8f9fbd15b82666
       size: 13717
+    - path: models/post_covmat.npy
+      md5: 95db96efb381bfafc68db9c7fffd5dbb
+      size: 328
+    - path: models/post_mean.npy
+      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      size: 168
     outs:
     - path: plots/predictive.png
       md5: 5a5433c34f1ba1b688ae0286576d790c
