@@ -26,9 +26,6 @@ if __name__ == "__main__":
         ).rename(columns={
             "decimal date": "year",
         })
-        
-    # print the data to make sure it's been parsed correctly
-    print(df.head())
     
     # save the data
     with open(args.output, 'w') as ouput_file:

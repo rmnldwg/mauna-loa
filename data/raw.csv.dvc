@@ -1,8 +1,8 @@
-md5: 82d792f60e15bbb44051095430cfafca
+md5: f19fcedef4fdef54344c868695cc9092
 frozen: true
 deps:
-- checksum: '"90d5-5d9cb4f67f554"'
-  size: 37077
+- checksum: '"9101-5dc24e634ca42"'
+  size: 37121
   path: https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv
 outs:
 - md5: b8b564f6b4bde7dc2d6f49d90b9df902

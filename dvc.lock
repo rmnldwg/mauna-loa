@@ -7,8 +7,8 @@ stages:
       md5: b8b564f6b4bde7dc2d6f49d90b9df902
       size: 37077
     - path: scripts/clean.py
-      md5: f74f4d9b6654c970d8567de7d850f9da
-      size: 1446
+      md5: 1689e392b0dd0d7a4c077b5b112df3c8
+      size: 1355
     outs:
     - path: data/clean.csv
       md5: 42d9ada26a353fab068cf580db2da9cf
