@@ -50,27 +50,27 @@ stages:
     params:
       params.yaml:
         cycle_len: -29.0
-        cycle_shift: 8
+        cycle_shift: 8.1
         loc: 1958.2027
         noise_precision: 10
-        prior_precision: 0.1
+        prior_precision: 0.045
         scale: 0.01
-        season_shift: -0.08
+        season_shift: -0.07
     outs:
     - path: models/post_covmat.npy
-      md5: 95db96efb381bfafc68db9c7fffd5dbb
+      md5: f0f144349c16eb17ef093b501b73b44c
       size: 328
     - path: models/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      md5: 65c70ee6756bbeca862877fd2b245ece
       size: 168
   eval:
     cmd: "python scripts/eval.py --data data --models models --metrics metrics.json\n"
     deps:
     - path: models/post_covmat.npy
-      md5: 95db96efb381bfafc68db9c7fffd5dbb
+      md5: f0f144349c16eb17ef093b501b73b44c
       size: 328
     - path: models/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      md5: 65c70ee6756bbeca862877fd2b245ece
       size: 168
     - path: scripts/eval.py
       md5: 45dc7b0f0d4a0a81dd8f9e035d927dea
@@ -81,15 +81,15 @@ stages:
     params:
       params.yaml:
         cycle_len: -29.0
-        cycle_shift: 8
+        cycle_shift: 8.1
         loc: 1958.2027
         noise_precision: 10
         scale: 0.01
-        season_shift: -0.08
+        season_shift: -0.07
     outs:
     - path: metrics.json
-      md5: 511d9a3b21306ed9c5995acd33d5de08
-      size: 63
+      md5: 83d66358a0dd4e50833ec04370daf3da
+      size: 64
   plots:
     cmd: "python scripts/plots.py --data data --models models --plots plots\n"
     deps:
@@ -100,12 +100,12 @@ stages:
       md5: 23a1bb6051c215f98e8f9fbd15b82666
       size: 13717
     - path: models/post_covmat.npy
-      md5: 95db96efb381bfafc68db9c7fffd5dbb
+      md5: f0f144349c16eb17ef093b501b73b44c
       size: 328
     - path: models/post_mean.npy
-      md5: 7f830ee1980278d0f21ae7dc7249fb9a
+      md5: 65c70ee6756bbeca862877fd2b245ece
       size: 168
     outs:
     - path: plots/predictive.png
-      md5: 5a5433c34f1ba1b688ae0286576d790c
-      size: 306708
+      md5: 2c68fa9a5cc34bf77f4f52111fefa611
+      size: 299263
